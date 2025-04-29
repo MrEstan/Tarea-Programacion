@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Pacientes - Inicio</title>
+    <style>
+        body {
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            border: 2px solid #007acc;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            width: 300px;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #007acc;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            background-color: #007acc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005a99;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    
+    <img src="C:\Users\Roier\Desktop\Image Pacintes\img.png" alt="Imagen" class="caratula" width="400" height="300">
+    
+    <div class="main-container">
+         
+        </div>
+        <div class="login-container">
+            <h2>Iniciar Sesión</h2>
+            <form id="loginForm">
+                <label for="usuario">Nombre De Usuario:</label>
+                <input type="text" id="usuario" name="usuario" required oninput="this.value = this.value.replace(/[^a-zA-ZÁÉÍÓÚáéíóúÑñ\s]/g, '')">
+
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" id="contraseña" name="contraseña" required oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')">
+
+                <button type="submit">Ingresar</button>
+                <div class="error" id="mensaje-error"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            validarInicioSesion();
+        });
+
+        function validarInicioSesion() {
+            const usuario = document.getElementById('usuario').value.trim().toLowerCase();
+            const contraseña = document.getElementById('contraseña').value;
+            const mensajeError = document.getElementById('mensaje-error');
+
+            if (usuario === "doctor" && contraseña === "Doctor2025") {
+                // Redirección a la página principal
+                window.location.href = "PaginasWEBPacientes/Panel Principal/PanelPrincipal.html";
+                return true;
+            } else {
+                mensajeError.textContent = "Usuario o contraseña incorrectos.";
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
