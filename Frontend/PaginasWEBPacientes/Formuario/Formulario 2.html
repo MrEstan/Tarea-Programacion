@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Pacientes</title>
+    <style>
+        body {
+            background-color: #ffffff; /* blanco */
+            font-family: Arial, sans-serif;
+            color: #000000; /* negro */
+            margin: 0;
+            padding: 0;
+        }
+
+        .formulario-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #f0f8ff; /* azul claro */
+            border: 2px solid #007acc; /* azul más fuerte */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #007acc;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007acc;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #005a99;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="formulario-container">
+        <h2>Formulario del Paciente</h2>
+        <form>
+            <label for="nombre">Nombre completo:</label>
+            <input type="text" id="nombre" name="nombre" required oninput="this.value = this.value.replace(/[^a-zA-ZÁÉÍÓÚáéíóúÑñ\s]/g, '')">
+           
+ <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" required min="0" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            <label for="genero">Género:</label>
+            <select id="genero" name="genero" required>
+                <option value="">Seleccione</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
+            </select>
+
+            <label for="direccion">Ubicación:</label>
+            <input type="text" id="direccion" name="direccion" 
+                   pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]*" title="Solo letras y espacios">
+
+            <label for="motivo">Motivo de consulta:</label>
+            <textarea id="motivo" name="motivo" rows="4" oninput="this.value = this.value.replace(/[^a-zA-ZÁÉÍÓÚáéíóúÑñ\s]/g, '')"></textarea>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Usuario</title>
+  <style>
+    /* copia tu CSS de .login-container y ajústalo si quieres */
+    body { display:flex; justify-content:center; align-items:center; height:100vh;
+           background:linear-gradient(to right, #00c6ff, #035a94); font-family:Arial, sans-serif; }
+    .login-container { background:#fff; padding:40px; border-radius:10px;
+                       border:2px solid #007acc; box-shadow:0 0 15px rgba(0,0,0,0.2); width:300px; }
+    input, button { width:100%; padding:8px; margin-top:10px; border-radius:5px; }
+    button { background:#007acc; color:#fff; border:none; cursor:pointer; }
+    button:hover { background:#005a99; }
+    .error { color:red; margin-top:10px; font-size:14px; text-align:center; }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Registro</h2>
+    <form id="registerForm">
+      <label for="usuarioReg">Nombre de Usuario:</label>
+      <input type="text" id="usuarioReg" name="usuario" required
+             oninput="this.value = this.value.replace(/[^a-zA-Z0-9]/g, '')">
+      
+      <label for="contrasenaReg">Contraseña:</label>
+      <input type="password" id="contrasenaReg" name="contrasena" required>
+      
+      <button type="submit">Registrarse</button>
+      <div class="error" id="register-error"></div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const usuario = document.getElementById('usuarioReg').value.trim();
+      const contrasena = document.getElementById('contrasenaReg').value;
+
+      fetch('Register.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: usuario, password: contrasena })
+      })
+      .then(response => {
+        if (response.ok) {
+          // Registro OK: redirige al panel principal o a login
+          window.location.href = 'PanelPrincipal.html';
+        } else {
+          return response.text().then(msg => {
+            document.getElementById('register-error').textContent = msg;
+          });
+        }
+      })
+      .catch(() => {
+        document.getElementById('register-error').textContent = 'Error de conexión';
+      });
+    });
+  </script>
+</body>
+</html>
